@@ -6,42 +6,47 @@
 <title>Asia Flag Flashcards</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;padding:18px;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#eef6ff,#f9fbff);color:#123;display:flex;align-items:center;justify-content:center}
-.app{width:100%;max-width:820px;background:#fff;border-radius:24px;padding:28px;box-shadow:0 15px 45px rgba(0,0,0,.12)}
-h1{text-align:center;color:#123d70;margin:0 0 8px}
-.subtitle{text-align:center;color:#667;margin:0 0 24px}
-.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.region-btn{border:2px solid #dbe6f1;background:#f7faff;border-radius:16px;padding:20px;text-align:left;cursor:pointer;transition:.2s}
-.region-btn:hover{border-color:#2474c8;background:#eef6ff;transform:translateY(-2px)}
-.region-btn h2{margin:0 0 7px;color:#123d70;font-size:20px}
-.region-btn p{margin:0;color:#667}
-.back-menu{border:0;background:#e7eef6;color:#123d70;padding:12px 16px;border-radius:12px;font-weight:bold;cursor:pointer;margin-bottom:16px}
-.top{display:flex;justify-content:space-between;gap:10px;font-weight:bold;margin-bottom:12px}
-.progress{height:9px;background:#e6edf5;border-radius:20px;overflow:hidden;margin-bottom:24px}
-.bar{height:100%;width:0;background:#2474c8;transition:.3s}
+body{margin:0;min-height:100vh;padding:24px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,#18365a 0,#0b1728 42%,#050b14 100%);color:#eaf2ff;display:flex;align-items:center;justify-content:center}
+.app{width:100%;max-width:940px;background:rgba(11,25,43,.94);border-radius:30px;padding:34px;box-shadow:0 30px 90px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(18px)}
+h1{text-align:center;color:#f7fbff;margin:0 0 8px;letter-spacing:-.8px;font-size:clamp(28px,5vw,40px)}
+.subtitle{text-align:center;color:#9db0c8;margin:0 0 24px;line-height:1.55}
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.region-btn{border:1px solid rgba(255,255,255,.11);background:linear-gradient(145deg,rgba(28,52,79,.95),rgba(15,31,50,.95));border-radius:18px;padding:22px;box-shadow:0 12px 28px rgba(0,0,0,.18);text-align:left;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;color:#fff}
+.region-btn:hover{border-color:#5db9ff;box-shadow:0 16px 34px rgba(0,0,0,.25);transform:translateY(-3px)}
+.region-btn h2{margin:0 0 7px;color:#f3f7ff;font-size:20px}
+.region-btn p{margin:0;color:#9fb0c7;font-size:14px}
+.back-menu{border:1px solid #304765;background:rgba(23,42,67,.9);color:#dce9fa;padding:11px 15px;border-radius:12px;font-weight:700;cursor:pointer;margin-bottom:16px;transition:.2s}.back-menu:hover{border-color:#5db9ff}
+.top{display:flex;justify-content:space-between;gap:10px;font-weight:700;color:#dbe8f7;margin-bottom:12px}
+.progress{height:8px;background:#1b2b40;border-radius:20px;overflow:hidden;margin-bottom:24px}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#4f9cff,#72d2ff);transition:.3s}
 .card-wrap{perspective:1000px;cursor:pointer}
 .card{width:100%;min-height:455px;position:relative;transform-style:preserve-3d;transition:transform .55s}
 .card.flipped{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;background:#f5f8fc;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;border:2px solid #e0e9f2}
-.back{transform:rotateY(180deg);background:#f8fbff}
-.flag{width:min(100%,580px);max-height:290px;object-fit:contain;border-radius:8px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.13)}
-.region{font-size:15px;font-weight:bold;color:#2474c8;margin-bottom:10px}
-.tap{font-size:18px;font-weight:bold;color:#2474c8;margin-top:22px}
-.answer-label{font-size:16px;color:#667;margin-bottom:8px}
-.country{font-size:34px;font-weight:800;color:#123d70;margin:5px 0 12px}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:24px;background:radial-gradient(circle at top,#1b304c,#101d30 62%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;border:1px solid #2c435f}
+.back{transform:rotateY(180deg);background:radial-gradient(circle at top,#203957,#101d30 65%)}
+.flag{width:min(100%,580px);max-height:290px;object-fit:contain;border-radius:8px;background:#fff;box-shadow:0 12px 35px rgba(0,0,0,.35)}
+.region{font-size:13px;font-weight:800;color:#72c7ff;margin-bottom:10px}
+.tap{font-size:15px;font-weight:700;color:#72c7ff;margin-top:22px}
+.voice-btn{border:1px solid #385777;border-radius:14px;padding:12px 18px;background:#162b45;color:#bfe8ff;font-weight:700;cursor:pointer;margin-top:14px}.voice-btn:hover{background:#dcecff}
+.answer-label{font-size:13px;color:#91a5be;margin-bottom:8px}
+.country{font-size:38px;font-weight:850;color:#f5f9ff;margin:5px 0 12px}
 .capital{font-size:22px;font-weight:bold;margin:0}
-.note{font-size:14px;color:#667;line-height:1.5;margin-top:12px;max-width:620px}
-.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.note{font-size:14px;color:#9fb0c7;line-height:1.5;margin-top:12px;max-width:620px}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.answer-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.wrong,.right{border:1px solid transparent;border-radius:14px;padding:14px;font-size:15px;font-weight:800;cursor:pointer;transition:transform .15s,box-shadow .15s}.wrong{background:rgba(183,53,53,.13);border-color:rgba(255,120,120,.25);color:#ffb3b3}.right{background:rgba(42,166,92,.13);border-color:rgba(100,230,145,.24);color:#a9f0c2}.wrong:hover,.right:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.18)}.save-status{text-align:center;font-size:13px;color:#8296af;margin:10px 0 0}.score{text-align:center;font-weight:700;color:#dce9fa;margin:8px 0 0}
 .controls button,.shuffle,.finish button{border:0;border-radius:13px;padding:15px;font-size:16px;font-weight:bold;cursor:pointer}
-.prev{background:#e7eef6;color:#123d70}
-.next{background:#123d70;color:#fff}
+.prev{background:#1a2b42;color:#dbe8f7;border:1px solid #304765!important}
+.next{background:linear-gradient(135deg,#2877d6,#4aa9e8);color:#fff}
 button:disabled{opacity:.45;cursor:not-allowed}
-.shuffle{width:100%;margin-top:12px;background:#2474c8;color:#fff}
-.instructions{text-align:center;color:#667;font-size:14px;margin:15px 0 0}
-.finish{text-align:center;display:none;padding:45px 10px}
-.finish h2{color:#123d70}
-.finish button{background:#123d70;color:#fff;width:100%;margin-top:18px}
+.shuffle{width:100%;margin-top:12px;background:rgba(23,42,67,.8);color:#dbe8f7;border:1px solid #304765!important}.shuffle:hover{border-color:#5db9ff!important}
+.instructions{text-align:center;color:#8296af;font-size:14px;margin:15px 0 0}
+.finish{text-align:center;display:none;padding:45px 10px}.finish p{color:#a9b8cb;line-height:1.6}
+.finish h2{color:#f5f9ff}
+.finish button{background:linear-gradient(135deg,#2877d6,#4aa9e8);color:#fff;width:100%;margin-top:18px}
 .hidden{display:none!important}
+
+.settings-btn{position:absolute;top:24px;right:24px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#dce9fa;border-radius:12px;padding:10px 13px;font-weight:800;cursor:pointer}.settings-btn:hover{border-color:#5db9ff;background:rgba(255,255,255,.1)}
+.menu-header{position:relative}.menu-header h1{padding:0 70px}.menu-progress{margin:26px 0 20px;padding:18px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.035);border-radius:18px}.menu-progress-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}.menu-progress-title{font-weight:850;color:#f4f8ff}.menu-progress-meta{font-size:13px;color:#8fa4bc}.region-progress{margin-top:12px}.region-progress-row{display:flex;justify-content:space-between;font-size:13px;color:#a9b9cc;margin-bottom:6px}.region-mini{height:6px;background:#1b2b40;border-radius:20px;overflow:hidden}.region-mini>span{display:block;height:100%;background:linear-gradient(90deg,#4f9cff,#72d2ff);border-radius:20px}
+.settings-overlay{position:fixed;inset:0;background:rgba(2,8,16,.72);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:20}.settings-panel{width:min(100%,480px);background:#102239;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.45)}.settings-panel h2{margin:0 0 6px;color:#fff}.settings-desc{color:#8fa4bc;font-size:14px;margin:0 0 20px}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid rgba(255,255,255,.08)}.setting-row strong{display:block;color:#eef5ff}.setting-row span{display:block;color:#879bb3;font-size:13px;margin-top:4px}.switch{position:relative;width:48px;height:28px;flex:0 0 auto}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;background:#263b53;border-radius:30px;cursor:pointer;transition:.2s}.slider:before{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}.switch input:checked+.slider{background:#3288e0}.switch input:checked+.slider:before{transform:translateX(20px)}.settings-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.settings-actions button{border-radius:13px;padding:13px;font-weight:800;cursor:pointer}.close-settings{background:#1b3049;color:#e5eef9;border:1px solid #304765}.reset-progress{background:rgba(190,60,60,.14);color:#ffb4b4;border:1px solid rgba(255,120,120,.28)}
 @media(max-width:600px){.app{padding:18px}.menu-grid{grid-template-columns:1fr}.card{min-height:370px}.flag{max-height:220px}.country{font-size:28px}.capital{font-size:19px}.top{font-size:14px}}
 </style>
 </head>
@@ -50,8 +55,15 @@ button:disabled{opacity:.45;cursor:not-allowed}
 
 <!-- MAIN MENU -->
 <div id="mainMenu">
-  <h1>🌏 Asia Flag Flashcards</h1>
-  <p class="subtitle">Choose which part of Asia you want to study</p>
+  <div class="menu-header">
+    <button class="settings-btn" onclick="openSettings()">⚙ Settings</button>
+    <h1>🌏 Asia Flag Flashcards</h1>
+    <p class="subtitle">Choose a region. Your current session progress is saved temporarily on this device.</p>
+  </div>
+  <div class="menu-progress" id="menuProgress">
+    <div class="menu-progress-head"><span class="menu-progress-title">Your Progress</span><span class="menu-progress-meta" id="overallProgressText">No progress yet</span></div>
+    <div id="regionProgressList"></div>
+  </div>
 
   <div class="menu-grid">
     <button class="region-btn" onclick="startRegion('Central Asia')">
@@ -100,6 +112,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
         <div class="country" id="country"></div>
         <p class="capital" id="capital"></p>
         <div class="note" id="note"></div>
+        <button class="voice-btn" onclick="speakAnswer(event)">🔊 Hear Answer</button>
         <div class="tap">Tap to hide answer</div>
       </div>
     </div>
@@ -109,6 +122,12 @@ button:disabled{opacity:.45;cursor:not-allowed}
     <button class="prev" id="prev" onclick="previousCard(event)">← Previous</button>
     <button class="next" id="next" onclick="nextCard(event)">Next →</button>
   </div>
+  <div class="answer-controls">
+    <button class="wrong" onclick="markAnswer(event,false)">← Wrong</button>
+    <button class="right" onclick="markAnswer(event,true)">Right →</button>
+  </div>
+  <div class="score" id="score">Right: 0 · Wrong: 0</div>
+  <div class="save-status" id="saveStatus">Progress is temporarily saved on this device.</div>
   <button class="shuffle" onclick="shuffleCards(event)">🔀 Shuffle This Region</button>
   <p class="instructions">Tap the flag to flip the flashcard.</p>
 </div>
@@ -121,6 +140,17 @@ button:disabled{opacity:.45;cursor:not-allowed}
   <button onclick="reviewAgain()">Review This Region Again</button>
 </div>
 
+</div>
+
+<div class="settings-overlay hidden" id="settingsOverlay" onclick="closeSettings(event)">
+  <div class="settings-panel" onclick="event.stopPropagation()">
+    <h2>⚙ Settings</h2>
+    <p class="settings-desc">Customize your study session.</p>
+    <div class="setting-row"><div><strong>🔊 Voice feedback</strong><span>Allow the Hear Answer button to speak.</span></div><label class="switch"><input id="voiceSetting" type="checkbox" onchange="saveSettings()"><span class="slider"></span></label></div>
+    <div class="setting-row"><div><strong>🗣 Auto-speak answers</strong><span>Read the answer automatically after marking.</span></div><label class="switch"><input id="autoSpeakSetting" type="checkbox" onchange="saveSettings()"><span class="slider"></span></label></div>
+    <div class="setting-row"><div><strong>🔀 Shuffle when starting</strong><span>Randomize a region each time you start it.</span></div><label class="switch"><input id="shuffleSetting" type="checkbox" onchange="saveSettings()"><span class="slider"></span></label></div>
+    <div class="settings-actions"><button class="close-settings" onclick="closeSettings()">Done</button><button class="reset-progress" onclick="resetProgress()">Reset Progress</button></div>
+  </div>
 </div>
 
 <script>
@@ -182,12 +212,18 @@ const countries = [
 {name:"Russia",capital:"Moscow",region:"Northern Asia",code:"ru",note:"For an Asia-only study set, focus on Russia's Asian territory: Siberia and the Russian Far East. Moscow is in the European part of Russia."}
 ];
 
-let cards=[],index=0,currentRegion="";
+let cards=[],index=0,currentRegion="",rightCount=0,wrongCount=0,answered=new Set();
+const SAVE_KEY="asiaFlagFlashcardsProgress";
 
 function startRegion(region){
   currentRegion=region;
   cards=countries.filter(c=>c.region===region);
   index=0;
+  rightCount=0; wrongCount=0; answered=new Set();
+  const saved=getSavedProgress(region);
+  if(saved){ index=Math.min(saved.index||0, Math.max(0,cards.length-1)); rightCount=saved.rightCount||0; wrongCount=saved.wrongCount||0; answered=new Set(saved.answered||[]); }
+  if(getSettings().shuffleOnStart && !saved){ cards=[...cards].sort(()=>Math.random()-.5); }
+  updateScore();
   document.getElementById("mainMenu").classList.add("hidden");
   document.getElementById("finish").style.display="none";
   document.getElementById("flashcards").classList.remove("hidden");
@@ -195,14 +231,21 @@ function startRegion(region){
 }
 
 function showMainMenu(){
+  window.speechSynthesis.cancel();
   document.getElementById("flashcards").classList.add("hidden");
   document.getElementById("finish").style.display="none";
   document.getElementById("mainMenu").classList.remove("hidden");
+  renderMenuProgress();
 }
 
 function load(){
   const c=cards[index];
-  document.getElementById("card").classList.remove("flipped");
+  const cardEl=document.getElementById("card");
+  // Reset to the front instantly so the previous answer never flashes during navigation.
+  cardEl.style.transition="none";
+  cardEl.classList.remove("flipped");
+  void cardEl.offsetWidth;
+  cardEl.style.transition="";
   document.getElementById("flag").src=`https://flagcdn.com/w640/${c.code}.png`;
   document.getElementById("flag").alt=c.name+" flag";
   document.getElementById("country").textContent=c.name;
@@ -215,17 +258,118 @@ function load(){
   document.getElementById("bar").style.width=`${((index+1)/cards.length)*100}%`;
   document.getElementById("prev").disabled=index===0;
   document.getElementById("next").textContent=index===cards.length-1?"Finish →":"Next →";
+  saveProgress();
 }
 
+function getAllSavedProgress(){
+  try{return JSON.parse(sessionStorage.getItem(SAVE_KEY)||"{}");}catch(err){return {};}
+}
+
+function getSavedProgress(region){
+  return getAllSavedProgress()[region]||null;
+}
+
+function saveProgress(){
+  try{
+    const all=getAllSavedProgress();
+    all[currentRegion]={index,rightCount,wrongCount,answered:[...answered]};
+    sessionStorage.setItem(SAVE_KEY,JSON.stringify(all));
+    document.getElementById("saveStatus").textContent="Progress saved for this session ✓";
+  }catch(err){}
+  renderMenuProgress();
+}
+
+function renderMenuProgress(){
+  const list=document.getElementById("regionProgressList");
+  if(!list) return;
+  const all=getAllSavedProgress();
+  let totalDone=0,totalCards=countries.length;
+  list.innerHTML=countries.reduce((html,c)=>html,"");
+  const regions=[...new Set(countries.map(c=>c.region))];
+  regions.forEach(region=>{
+    const total=countries.filter(c=>c.region===region).length;
+    const saved=all[region];
+    const done=saved?Math.min(saved.index||0,total):0;
+    const answeredCount=saved&&saved.answered?saved.answered.length:0;
+    const pct=Math.min(100,Math.round((Math.max(done,answeredCount)/total)*100));
+    totalDone+=Math.max(done,answeredCount);
+    const status=pct===100?"Complete":(pct?`${Math.max(done,answeredCount)} / ${total}`:"Not started");
+    list.innerHTML+=`<div class="region-progress"><div class="region-progress-row"><span>${region}</span><span>${status}</span></div><div class="region-mini"><span style="width:${pct}%"></span></div></div>`;
+  });
+  document.getElementById("overallProgressText").textContent=totalDone?`${totalDone} / ${totalCards} cards in this session`:"No progress yet";
+}
+
+function getSettings(){
+  try{return Object.assign({voice:true,autoSpeak:false,shuffleOnStart:false},JSON.parse(localStorage.getItem("asiaFlagFlashcardSettings")||"{}"));}catch(err){return {voice:true,autoSpeak:false,shuffleOnStart:false};}
+}
+function saveSettings(){
+  const settings={voice:document.getElementById("voiceSetting").checked,autoSpeak:document.getElementById("autoSpeakSetting").checked,shuffleOnStart:document.getElementById("shuffleSetting").checked};
+  localStorage.setItem("asiaFlagFlashcardSettings",JSON.stringify(settings));
+  const voiceBtn=document.querySelector(".voice-btn"); if(voiceBtn) voiceBtn.style.display=settings.voice?"":"none";
+}
+function openSettings(){
+  const s=getSettings();
+  document.getElementById("voiceSetting").checked=s.voice; document.getElementById("autoSpeakSetting").checked=s.autoSpeak; document.getElementById("shuffleSetting").checked=s.shuffleOnStart;
+  document.getElementById("settingsOverlay").classList.remove("hidden");
+}
+function closeSettings(e){if(e && e.target!==document.getElementById("settingsOverlay")) return; document.getElementById("settingsOverlay").classList.add("hidden");}
+function resetProgress(){
+  if(!confirm("Reset all temporary study progress for this session?")) return;
+  sessionStorage.removeItem(SAVE_KEY);
+  currentRegion=""; index=0; rightCount=0; wrongCount=0; answered=new Set();
+  document.getElementById("settingsOverlay").classList.add("hidden");
+  renderMenuProgress();
+}
+
+function updateScore(){
+  const el=document.getElementById("score");
+  if(el) el.textContent=`Right: ${rightCount} · Wrong: ${wrongCount}`;
+}
+
+function markAnswer(e,isRight){
+  e.stopPropagation();
+  if(answered.has(index)) return;
+  const currentCard=cards[index];
+  answered.add(index);
+  if(isRight) rightCount++; else wrongCount++;
+  updateScore();
+  if(getSettings().autoSpeak && getSettings().voice && currentCard){
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(`${currentCard.name}. Capital: ${currentCard.capital}.`); u.lang="en-US"; u.rate=.9; window.speechSynthesis.speak(u);
+  }
+  if(index<cards.length-1){index++;load();}
+  else finishRegion();
+}
+
+function finishRegion(){
+  sessionStorage.removeItem(SAVE_KEY);
+  document.getElementById("flashcards").classList.add("hidden");
+  document.getElementById("finish").style.display="block";
+  document.getElementById("finishText").textContent=`You reviewed all ${cards.length} flashcards in ${currentRegion}. Score: ${rightCount} right, ${wrongCount} wrong.`;
+}
+
+
 function flipCard(){document.getElementById("card").classList.toggle("flipped")}
+
+function speakAnswer(e){
+  e.stopPropagation();
+  if(!getSettings().voice) return;
+  const c=cards[index];
+  if(!c) return;
+  window.speechSynthesis.cancel();
+  const text=`${c.name}. Capital: ${c.capital}.`;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US";
+  u.rate=0.9;
+  u.pitch=1;
+  window.speechSynthesis.speak(u);
+}
 
 function nextCard(e){
   e.stopPropagation();
   if(index<cards.length-1){index++;load();}
   else{
-    document.getElementById("flashcards").classList.add("hidden");
-    document.getElementById("finish").style.display="block";
-    document.getElementById("finishText").textContent=`You reviewed all ${cards.length} flashcards in ${currentRegion}.`;
+    finishRegion();
   }
 }
 
@@ -238,6 +382,8 @@ function shuffleCards(e){
   e.stopPropagation();
   cards=[...cards].sort(()=>Math.random()-.5);
   index=0;
+  rightCount=0; wrongCount=0; answered=new Set(); updateScore();
+  saveProgress();
   load();
 }
 
@@ -247,6 +393,8 @@ function reviewAgain(){
   document.getElementById("flashcards").classList.remove("hidden");
   load();
 }
+
+renderMenuProgress();
 </script>
 </body>
 </html>
