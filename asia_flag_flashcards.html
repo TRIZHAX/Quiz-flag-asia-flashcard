@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asia Flag Flashcards</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:18px;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#eef6ff,#f9fbff);color:#123;display:flex;align-items:center;justify-content:center}
+.app{width:100%;max-width:820px;background:#fff;border-radius:24px;padding:28px;box-shadow:0 15px 45px rgba(0,0,0,.12)}
+h1{text-align:center;color:#123d70;margin:0 0 8px}
+.subtitle{text-align:center;color:#667;margin:0 0 24px}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.region-btn{border:2px solid #dbe6f1;background:#f7faff;border-radius:16px;padding:20px;text-align:left;cursor:pointer;transition:.2s}
+.region-btn:hover{border-color:#2474c8;background:#eef6ff;transform:translateY(-2px)}
+.region-btn h2{margin:0 0 7px;color:#123d70;font-size:20px}
+.region-btn p{margin:0;color:#667}
+.back-menu{border:0;background:#e7eef6;color:#123d70;padding:12px 16px;border-radius:12px;font-weight:bold;cursor:pointer;margin-bottom:16px}
+.top{display:flex;justify-content:space-between;gap:10px;font-weight:bold;margin-bottom:12px}
+.progress{height:9px;background:#e6edf5;border-radius:20px;overflow:hidden;margin-bottom:24px}
+.bar{height:100%;width:0;background:#2474c8;transition:.3s}
+.card-wrap{perspective:1000px;cursor:pointer}
+.card{width:100%;min-height:455px;position:relative;transform-style:preserve-3d;transition:transform .55s}
+.card.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;background:#f5f8fc;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;border:2px solid #e0e9f2}
+.back{transform:rotateY(180deg);background:#f8fbff}
+.flag{width:min(100%,580px);max-height:290px;object-fit:contain;border-radius:8px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.13)}
+.region{font-size:15px;font-weight:bold;color:#2474c8;margin-bottom:10px}
+.tap{font-size:18px;font-weight:bold;color:#2474c8;margin-top:22px}
+.answer-label{font-size:16px;color:#667;margin-bottom:8px}
+.country{font-size:34px;font-weight:800;color:#123d70;margin:5px 0 12px}
+.capital{font-size:22px;font-weight:bold;margin:0}
+.note{font-size:14px;color:#667;line-height:1.5;margin-top:12px;max-width:620px}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.controls button,.shuffle,.finish button{border:0;border-radius:13px;padding:15px;font-size:16px;font-weight:bold;cursor:pointer}
+.prev{background:#e7eef6;color:#123d70}
+.next{background:#123d70;color:#fff}
+button:disabled{opacity:.45;cursor:not-allowed}
+.shuffle{width:100%;margin-top:12px;background:#2474c8;color:#fff}
+.instructions{text-align:center;color:#667;font-size:14px;margin:15px 0 0}
+.finish{text-align:center;display:none;padding:45px 10px}
+.finish h2{color:#123d70}
+.finish button{background:#123d70;color:#fff;width:100%;margin-top:18px}
+.hidden{display:none!important}
+@media(max-width:600px){.app{padding:18px}.menu-grid{grid-template-columns:1fr}.card{min-height:370px}.flag{max-height:220px}.country{font-size:28px}.capital{font-size:19px}.top{font-size:14px}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- MAIN MENU -->
+<div id="mainMenu">
+  <h1>🌏 Asia Flag Flashcards</h1>
+  <p class="subtitle">Choose which part of Asia you want to study</p>
+
+  <div class="menu-grid">
+    <button class="region-btn" onclick="startRegion('Central Asia')">
+      <h2>🌏 Central Asia</h2><p>5 countries</p>
+    </button>
+    <button class="region-btn" onclick="startRegion('Eastern Asia')">
+      <h2>🗾 Eastern Asia</h2><p>6 countries</p>
+    </button>
+    <button class="region-btn" onclick="startRegion('Southeastern Asia')">
+      <h2>🌴 Southeastern Asia</h2><p>11 countries</p>
+    </button>
+    <button class="region-btn" onclick="startRegion('Southern Asia')">
+      <h2>🏔️ Southern Asia</h2><p>9 countries</p>
+    </button>
+    <button class="region-btn" onclick="startRegion('Western Asia')">
+      <h2>🕌 Western Asia</h2><p>18 countries</p>
+    </button>
+    <button class="region-btn" onclick="startRegion('Northern Asia')">
+      <h2>❄️ Northern Asia</h2><p>Russia — Asian territory</p>
+    </button>
+  </div>
+</div>
+
+<!-- FLASHCARDS -->
+<div id="flashcards" class="hidden">
+  <button class="back-menu" onclick="showMainMenu()">← Back to Main Menu</button>
+
+  <h1 id="title">🌏 Asia Flag Flashcards</h1>
+  <p class="subtitle" id="subtitle">Study the flag, then tap the card to reveal the country and capital</p>
+
+  <div class="top">
+    <span id="counter">1 of 1</span>
+    <span id="region">Asia</span>
+  </div>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+
+  <div class="card-wrap" onclick="flipCard()">
+    <div class="card" id="card">
+      <div class="face front">
+        <div class="region" id="frontRegion"></div>
+        <img class="flag" id="flag" src="" alt="Flag">
+        <div class="tap">Tap to reveal answer</div>
+      </div>
+      <div class="face back">
+        <div class="answer-label">ANSWER</div>
+        <div class="country" id="country"></div>
+        <p class="capital" id="capital"></p>
+        <div class="note" id="note"></div>
+        <div class="tap">Tap to hide answer</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="prev" id="prev" onclick="previousCard(event)">← Previous</button>
+    <button class="next" id="next" onclick="nextCard(event)">Next →</button>
+  </div>
+  <button class="shuffle" onclick="shuffleCards(event)">🔀 Shuffle This Region</button>
+  <p class="instructions">Tap the flag to flip the flashcard.</p>
+</div>
+
+<!-- FINISH -->
+<div class="finish" id="finish">
+  <button class="back-menu" onclick="showMainMenu()">← Back to Main Menu</button>
+  <h2>🎉 Region Complete!</h2>
+  <p id="finishText"></p>
+  <button onclick="reviewAgain()">Review This Region Again</button>
+</div>
+
+</div>
+
+<script>
+const countries = [
+{name:"Kazakhstan",capital:"Astana",region:"Central Asia",code:"kz"},
+{name:"Kyrgyzstan",capital:"Bishkek",region:"Central Asia",code:"kg"},
+{name:"Tajikistan",capital:"Dushanbe",region:"Central Asia",code:"tj"},
+{name:"Turkmenistan",capital:"Ashgabat",region:"Central Asia",code:"tm"},
+{name:"Uzbekistan",capital:"Tashkent",region:"Central Asia",code:"uz"},
+
+{name:"China",capital:"Beijing",region:"Eastern Asia",code:"cn"},
+{name:"Japan",capital:"Tokyo",region:"Eastern Asia",code:"jp"},
+{name:"Mongolia",capital:"Ulaanbaatar",region:"Eastern Asia",code:"mn"},
+{name:"North Korea",capital:"Pyongyang",region:"Eastern Asia",code:"kp"},
+{name:"South Korea",capital:"Seoul",region:"Eastern Asia",code:"kr"},
+{name:"Taiwan",capital:"Taipei",region:"Eastern Asia",code:"tw",note:"Listed in the supplied study set as Taiwan (province of China)."},
+
+{name:"Brunei",capital:"Bandar Seri Begawan",region:"Southeastern Asia",code:"bn"},
+{name:"Cambodia",capital:"Phnom Penh",region:"Southeastern Asia",code:"kh"},
+{name:"Indonesia",capital:"Jakarta",region:"Southeastern Asia",code:"id",note:"Nusantara is planned as Indonesia's new capital."},
+{name:"Laos",capital:"Vientiane",region:"Southeastern Asia",code:"la"},
+{name:"Malaysia",capital:"Kuala Lumpur & Putrajaya",region:"Southeastern Asia",code:"my",note:"Kuala Lumpur is the national capital; Putrajaya is the federal administrative centre."},
+{name:"Myanmar (Burma)",capital:"Naypyidaw",region:"Southeastern Asia",code:"mm"},
+{name:"Philippines",capital:"Manila",region:"Southeastern Asia",code:"ph"},
+{name:"Singapore",capital:"Singapore",region:"Southeastern Asia",code:"sg",note:"Singapore is a city-state."},
+{name:"Thailand",capital:"Bangkok",region:"Southeastern Asia",code:"th"},
+{name:"Timor-Leste",capital:"Dili",region:"Southeastern Asia",code:"tl"},
+{name:"Vietnam",capital:"Hanoi",region:"Southeastern Asia",code:"vn"},
+
+{name:"Afghanistan",capital:"Kabul",region:"Southern Asia",code:"af"},
+{name:"Bangladesh",capital:"Dhaka",region:"Southern Asia",code:"bd"},
+{name:"Bhutan",capital:"Thimphu",region:"Southern Asia",code:"bt"},
+{name:"India",capital:"New Delhi",region:"Southern Asia",code:"in"},
+{name:"Iran",capital:"Tehran",region:"Southern Asia",code:"ir"},
+{name:"Maldives",capital:"Malé",region:"Southern Asia",code:"mv"},
+{name:"Nepal",capital:"Kathmandu",region:"Southern Asia",code:"np"},
+{name:"Pakistan",capital:"Islamabad",region:"Southern Asia",code:"pk"},
+{name:"Sri Lanka",capital:"Sri Jayawardenepura Kotte & Colombo",region:"Southern Asia",code:"lk",note:"Sri Jayawardenepura Kotte is the legislative capital; Colombo is the executive and judicial centre."},
+
+{name:"Armenia",capital:"Yerevan",region:"Western Asia",code:"am"},
+{name:"Azerbaijan",capital:"Baku",region:"Western Asia",code:"az"},
+{name:"Bahrain",capital:"Manama",region:"Western Asia",code:"bh"},
+{name:"Cyprus",capital:"Nicosia",region:"Western Asia",code:"cy"},
+{name:"Georgia",capital:"Tbilisi",region:"Western Asia",code:"ge"},
+{name:"Iraq",capital:"Baghdad",region:"Western Asia",code:"iq"},
+{name:"Israel",capital:"Jerusalem",region:"Western Asia",code:"il",note:"Jerusalem is Israel's proclaimed capital; its status has limited international recognition."},
+{name:"Jordan",capital:"Amman",region:"Western Asia",code:"jo"},
+{name:"Kuwait",capital:"Kuwait City",region:"Western Asia",code:"kw"},
+{name:"Lebanon",capital:"Beirut",region:"Western Asia",code:"lb"},
+{name:"Oman",capital:"Muscat",region:"Western Asia",code:"om"},
+{name:"Palestine",capital:"East Jerusalem / Ramallah",region:"Western Asia",code:"ps",note:"East Jerusalem is declared as the capital; Ramallah serves as the administrative centre."},
+{name:"Qatar",capital:"Doha",region:"Western Asia",code:"qa"},
+{name:"Saudi Arabia",capital:"Riyadh",region:"Western Asia",code:"sa"},
+{name:"Syria",capital:"Damascus",region:"Western Asia",code:"sy"},
+{name:"Turkey (Türkiye)",capital:"Ankara",region:"Western Asia",code:"tr"},
+{name:"United Arab Emirates",capital:"Abu Dhabi",region:"Western Asia",code:"ae"},
+{name:"Yemen",capital:"Sana'a",region:"Western Asia",code:"ye",note:"Sana'a is constitutionally the capital; Aden has served as a provisional seat of government."},
+
+{name:"Russia",capital:"Moscow",region:"Northern Asia",code:"ru",note:"For an Asia-only study set, focus on Russia's Asian territory: Siberia and the Russian Far East. Moscow is in the European part of Russia."}
+];
+
+let cards=[],index=0,currentRegion="";
+
+function startRegion(region){
+  currentRegion=region;
+  cards=countries.filter(c=>c.region===region);
+  index=0;
+  document.getElementById("mainMenu").classList.add("hidden");
+  document.getElementById("finish").style.display="none";
+  document.getElementById("flashcards").classList.remove("hidden");
+  load();
+}
+
+function showMainMenu(){
+  document.getElementById("flashcards").classList.add("hidden");
+  document.getElementById("finish").style.display="none";
+  document.getElementById("mainMenu").classList.remove("hidden");
+}
+
+function load(){
+  const c=cards[index];
+  document.getElementById("card").classList.remove("flipped");
+  document.getElementById("flag").src=`https://flagcdn.com/w640/${c.code}.png`;
+  document.getElementById("flag").alt=c.name+" flag";
+  document.getElementById("country").textContent=c.name;
+  document.getElementById("capital").textContent="Capital: "+c.capital;
+  document.getElementById("note").textContent=c.note||"";
+  document.getElementById("frontRegion").textContent=c.region;
+  document.getElementById("region").textContent=c.region;
+  document.getElementById("title").textContent="🌏 "+c.region+" Flag Flashcards";
+  document.getElementById("counter").textContent=`${index+1} of ${cards.length}`;
+  document.getElementById("bar").style.width=`${((index+1)/cards.length)*100}%`;
+  document.getElementById("prev").disabled=index===0;
+  document.getElementById("next").textContent=index===cards.length-1?"Finish →":"Next →";
+}
+
+function flipCard(){document.getElementById("card").classList.toggle("flipped")}
+
+function nextCard(e){
+  e.stopPropagation();
+  if(index<cards.length-1){index++;load();}
+  else{
+    document.getElementById("flashcards").classList.add("hidden");
+    document.getElementById("finish").style.display="block";
+    document.getElementById("finishText").textContent=`You reviewed all ${cards.length} flashcards in ${currentRegion}.`;
+  }
+}
+
+function previousCard(e){
+  e.stopPropagation();
+  if(index>0){index--;load();}
+}
+
+function shuffleCards(e){
+  e.stopPropagation();
+  cards=[...cards].sort(()=>Math.random()-.5);
+  index=0;
+  load();
+}
+
+function reviewAgain(){
+  index=0;
+  document.getElementById("finish").style.display="none";
+  document.getElementById("flashcards").classList.remove("hidden");
+  load();
+}
+</script>
+</body>
+</html>
